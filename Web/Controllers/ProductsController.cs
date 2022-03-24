@@ -31,7 +31,52 @@ namespace Web.Controllers
         [HttpGet]
         public async Task<IActionResult> GetProducts([FromQuery] string name)
         {
-            var products = string.IsNullOrWhiteSpace(name) ? await _productRepository.GetAllAsync() : await _productRepository.GetProductsByNameAsync(name); // TODO: find a better way of making this extensible in case new query parameters are added
+            /*var products = string.IsNullOrWhiteSpace(name) ? await _productRepository.GetAllAsync() : await _productRepository.GetProductsByNameAsync(name); // TODO: find a better way of making this extensible in case new query parameters are added*/
+
+            var products = new List<Product>()
+            {
+                new Product()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Product1",
+                    Description = "Description1",
+                    Price = 1,
+                    DeliveryPrice = 11
+                },
+                new Product()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Product2",
+                    Description = "Description2",
+                    Price = 2,
+                    DeliveryPrice = 22
+                },
+                new Product()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Product3",
+                    Description = "Description3",
+                    Price = 3,
+                    DeliveryPrice = 33
+                },
+                new Product()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Product3",
+                    Description = "Description3",
+                    Price = 3,
+                    DeliveryPrice = 33
+                },
+                new Product()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Product",
+                    Description = "Description4",
+                    Price = 4,
+                    DeliveryPrice = 44
+                }
+            };
+
             var response = new ProductListResponse(products);
             return Ok(response);
         }
